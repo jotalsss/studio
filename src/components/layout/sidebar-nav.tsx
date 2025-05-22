@@ -8,8 +8,7 @@ import {
   TrendingDown,
   FileText,
   Sparkles,
-  Settings, // Added Settings icon
-} from 'lucide-react';
+} from 'lucide-react'; // Removed Settings icon as it's not used
 import {
   SidebarMenu,
   SidebarMenuItem,
@@ -18,11 +17,11 @@ import {
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { href: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/add-income', label: 'Add Income', icon: TrendingUp },
-  { href: '/add-expense', label: 'Add Expense', icon: TrendingDown },
-  { href: '/reports', label: 'Reports', icon: FileText },
-  { href: '/ai-suggestions', label: 'AI Suggestions', icon: Sparkles },
+  { href: '/', label: 'Painel Principal', icon: LayoutDashboard },
+  { href: '/add-income', label: 'Adicionar Receita', icon: TrendingUp },
+  { href: '/add-expense', label: 'Adicionar Despesa', icon: TrendingDown },
+  { href: '/reports', label: 'Relatórios', icon: FileText },
+  { href: '/ai-suggestions', label: 'Sugestões IA', icon: Sparkles },
 ];
 
 export function SidebarNav() {
@@ -39,7 +38,7 @@ export function SidebarNav() {
               tooltip={item.label}
               className={cn(pathname === item.href ? 'bg-sidebar-primary text-sidebar-primary-foreground' : '')}
             >
-              <a> {/* <a> tag needed for legacyBehavior with asChild on SidebarMenuButton */}
+              <a> 
                 <item.icon className="h-5 w-5" />
                 <span className="group-data-[collapsible=icon]:hidden">
                   {item.label}

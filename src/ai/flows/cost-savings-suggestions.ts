@@ -15,7 +15,7 @@ const CostSavingsSuggestionsInputSchema = z.object({
   spendingHabits: z
     .string()
     .describe(
-      'A description of the user spending habits, including income, expenses and categories.'
+      'Uma descrição dos hábitos de consumo do usuário, incluindo renda, despesas e categorias.'
     ),
 });
 
@@ -26,7 +26,7 @@ export type CostSavingsSuggestionsInput = z.infer<
 const CostSavingsSuggestionsOutputSchema = z.object({
   suggestions: z
     .array(z.string())
-    .describe('A list of cost savings suggestions.'),
+    .describe('Uma lista de sugestões de economia.'),
 });
 
 export type CostSavingsSuggestionsOutput = z.infer<
@@ -43,11 +43,11 @@ const prompt = ai.definePrompt({
   name: 'costSavingsSuggestionsPrompt',
   input: {schema: CostSavingsSuggestionsInputSchema},
   output: {schema: CostSavingsSuggestionsOutputSchema},
-  prompt: `You are a personal finance advisor. Based on the user's spending habits, you will suggest ways to reduce expenses and save money.
+  prompt: `Você é um consultor financeiro pessoal. Com base nos hábitos de consumo do usuário, você sugerirá maneiras de reduzir despesas e economizar dinheiro. Responda em Português do Brasil.
 
-Spending Habits: {{{spendingHabits}}}
+Hábitos de Consumo: {{{spendingHabits}}}
 
-Provide a list of actionable suggestions to reduce spending.`,
+Forneça uma lista de sugestões práticas para reduzir gastos.`,
 });
 
 const costSavingsSuggestionsFlow = ai.defineFlow(

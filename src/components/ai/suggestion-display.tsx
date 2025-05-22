@@ -15,7 +15,7 @@ export function SuggestionDisplay({ suggestions }: SuggestionDisplayProps) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-xl text-accent">
           <Lightbulb className="h-6 w-6" />
-          Cost Saving Suggestions
+          Sugestões de Economia
         </CardTitle>
       </CardHeader>
       <CardContent>

@@ -21,14 +21,15 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import { Calendar as CalendarIcon } from "lucide-react";
 import type { Control } from "react-hook-form";
 import type { z } from "zod";
-import type { TransactionFormSchema } from "./transaction-form-schema"; // we'll create this
+import type { TransactionFormSchema } from "./transaction-form-schema"; 
 
 const categories = {
-  income: ["Salary", "Freelance", "Investment", "Gift", "Other"],
-  expense: ["Housing", "Food", "Transport", "Utilities", "Entertainment", "Healthcare", "Education", "Other"],
+  income: ["Salário", "Freelance", "Investimento", "Presente", "Outro"],
+  expense: ["Moradia", "Alimentação", "Transporte", "Contas Fixas", "Entretenimento", "Saúde", "Educação", "Outro"],
 };
 
 interface TransactionFormFieldsProps {
@@ -44,9 +45,9 @@ export function TransactionFormFields({ control, transactionType }: TransactionF
         name="description"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Description</FormLabel>
+            <FormLabel>Descrição</FormLabel>
             <FormControl>
-              <Input placeholder="e.g., Monthly Salary, Groceries" {...field} />
+              <Input placeholder="Ex: Salário Mensal, Compras de mercado" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -58,9 +59,9 @@ export function TransactionFormFields({ control, transactionType }: TransactionF
         name="amount"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Amount (R$)</FormLabel>
+            <FormLabel>Valor (R$)</FormLabel>
             <FormControl>
-              <Input type="number" placeholder="0.00" {...field} onChange={e => field.onChange(parseFloat(e.target.value))} />
+              <Input type="number" placeholder="0,00" {...field} onChange={e => field.onChange(parseFloat(e.target.value))} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -72,7 +73,7 @@ export function TransactionFormFields({ control, transactionType }: TransactionF
         name="date"
         render={({ field }) => (
           <FormItem className="flex flex-col">
-            <FormLabel>Date</FormLabel>
+            <FormLabel>Data</FormLabel>
             <Popover>
               <PopoverTrigger asChild>
                 <FormControl>
@@ -84,9 +85,9 @@ export function TransactionFormFields({ control, transactionType }: TransactionF
                     )}
                   >
                     {field.value ? (
-                      format(field.value, "PPP")
+                      format(field.value, "PPP", { locale: ptBR })
                     ) : (
-                      <span>Pick a date</span>
+                      <span>Escolha uma data</span>
                     )}
                     <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                   </Button>
@@ -101,6 +102,7 @@ export function TransactionFormFields({ control, transactionType }: TransactionF
                     date > new Date() || date < new Date("1900-01-01")
                   }
                   initialFocus
+                  locale={ptBR}
                 />
               </PopoverContent>
             </Popover>
@@ -114,11 +116,11 @@ export function TransactionFormFields({ control, transactionType }: TransactionF
         name="category"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Category</FormLabel>
+            <FormLabel>Categoria</FormLabel>
             <Select onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a category" />
+                  <SelectValue placeholder="Selecione uma categoria" />
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
@@ -130,7 +132,7 @@ export function TransactionFormFields({ control, transactionType }: TransactionF
               </SelectContent>
             </Select>
             <FormDescription>
-              Optional: categorize your {transactionType}.
+              Opcional: categorize sua {transactionType === 'income' ? 'receita' : 'despesa'}.
             </FormDescription>
             <FormMessage />
           </FormItem>

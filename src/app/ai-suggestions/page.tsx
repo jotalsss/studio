@@ -18,8 +18,8 @@ export default function AiSuggestionsPage() {
   return (
     <div className="container mx-auto space-y-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">AI Cost Savings Advisor</h1>
-        <p className="text-muted-foreground">Get smart tips to reduce your expenses.</p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">Consultor de Economia IA</h1>
+        <p className="text-muted-foreground">Receba dicas inteligentes para reduzir suas despesas.</p>
       </div>
       
       <CostSuggestionForm 

@@ -14,7 +14,7 @@ import { getCostSavingsSuggestionsAction } from "@/app/ai-suggestions/actions";
 import type { CostSavingsSuggestionsOutput } from "@/ai/flows/cost-savings-suggestions";
 
 const FormSchema = z.object({
-  spendingHabits: z.string().min(50, "Please describe your spending habits in at least 50 characters."),
+  spendingHabits: z.string().min(50, "Por favor, descreva seus hábitos de consumo em pelo menos 50 caracteres."),
 });
 type FormData = z.infer<typeof FormSchema>;
 
@@ -41,7 +41,7 @@ export function CostSuggestionForm({ onSuggestionsReceived, onClearSuggestions }
       } else if (result.suggestions) {
         onSuggestionsReceived(result.suggestions);
       } else {
-         setError("An unexpected error occurred. No suggestions were returned.");
+         setError("Ocorreu um erro inesperado. Nenhuma sugestão foi retornada.");
       }
     });
   };
@@ -51,20 +51,20 @@ export function CostSuggestionForm({ onSuggestionsReceived, onClearSuggestions }
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-2xl">
           <Sparkles className="h-6 w-6 text-accent" />
-          AI-Powered Cost Savings
+          Sugestões de Economia com IA
         </CardTitle>
         <CardDescription>
-          Describe your spending habits, and our AI will provide personalized suggestions to help you save money.
-          Include details about your income, main expenses, and financial goals for better advice.
+          Descreva seus hábitos de consumo e nossa IA fornecerá sugestões personalizadas para ajudá-lo a economizar.
+          Inclua detalhes sobre sua renda, principais despesas e metas financeiras para melhores conselhos.
         </CardDescription>
       </CardHeader>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardContent className="space-y-4">
           <div>
-            <Label htmlFor="spendingHabits" className="text-base">Your Spending Habits</Label>
+            <Label htmlFor="spendingHabits" className="text-base">Seus Hábitos de Consumo</Label>
             <Textarea
               id="spendingHabits"
-              placeholder="e.g., I earn R$5000/month. My main expenses are rent (R$1500), food (R$800), and transport (R$300). I like to dine out twice a week..."
+              placeholder="Ex: Ganho R$5000/mês. Minhas principais despesas são aluguel (R$1500), alimentação (R$800) e transporte (R$300). Gosto de jantar fora duas vezes por semana..."
               className="mt-1 min-h-[150px] resize-y"
               {...form.register("spendingHabits")}
             />
@@ -74,7 +74,7 @@ export function CostSuggestionForm({ onSuggestionsReceived, onClearSuggestions }
           </div>
           {error && (
             <Alert variant="destructive">
-              <AlertTitle>Error</AlertTitle>
+              <AlertTitle>Erro</AlertTitle>
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
@@ -84,10 +84,10 @@ export function CostSuggestionForm({ onSuggestionsReceived, onClearSuggestions }
             {isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Generating Suggestions...
+                Gerando Sugestões...
               </>
             ) : (
-              "Get Suggestions"
+              "Obter Sugestões"
             )}
           </Button>
         </CardFooter>

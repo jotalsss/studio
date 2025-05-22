@@ -23,10 +23,10 @@ export function RecentTransactions({ transactions, limit = 5 }: RecentTransactio
     return (
       <Card className="shadow-lg mt-8">
         <CardHeader>
-          <CardTitle>Recent Transactions</CardTitle>
+          <CardTitle>Transações Recentes</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground">No transactions yet. Add an income or expense to get started!</p>
+          <p className="text-muted-foreground">Nenhuma transação ainda. Adicione uma receita ou despesa para começar!</p>
         </CardContent>
       </Card>
     );
@@ -35,28 +35,28 @@ export function RecentTransactions({ transactions, limit = 5 }: RecentTransactio
   return (
     <Card className="shadow-lg mt-8">
       <CardHeader>
-        <CardTitle>Recent Transactions</CardTitle>
+        <CardTitle>Transações Recentes</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Type</TableHead>
-              <TableHead>Description</TableHead>
-              <TableHead>Category</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
+              <TableHead className="w-[100px]">Tipo</TableHead>
+              <TableHead>Descrição</TableHead>
+              <TableHead>Categoria</TableHead>
+              <TableHead>Data</TableHead>
+              <TableHead className="text-right">Valor</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {recent.map((transaction) => (
               <TableRow key={transaction.id}>
                 <TableCell>
-                  <Badge variant={transaction.type === 'income' ? 'default' : 'destructive'} className="capitalize">
+                  <Badge variant={transaction.type === 'income' ? 'default' : 'destructive'} className="capitalize flex items-center">
                     {transaction.type === 'income' ? 
                       <ArrowUpCircle className="mr-1 h-4 w-4 text-green-400" /> : 
                       <ArrowDownCircle className="mr-1 h-4 w-4 text-red-400" />}
-                    {transaction.type}
+                    {transaction.type === 'income' ? 'Receita' : 'Despesa'}
                   </Badge>
                 </TableCell>
                 <TableCell className="font-medium">{transaction.description}</TableCell>
@@ -67,7 +67,7 @@ export function RecentTransactions({ transactions, limit = 5 }: RecentTransactio
                     '-'
                   )}
                 </TableCell>
-                <TableCell>{new Date(transaction.date).toLocaleDateString()}</TableCell>
+                <TableCell>{new Date(transaction.date).toLocaleDateString('pt-BR')}</TableCell>
                 <TableCell className={`text-right font-semibold ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
                   {transaction.amount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                 </TableCell>

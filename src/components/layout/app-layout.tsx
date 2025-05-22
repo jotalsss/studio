@@ -1,4 +1,4 @@
-"use client"; // SidebarProvider and useSidebar hook likely use client features
+"use client"; 
 
 import type { ReactNode } from 'react';
 import {
@@ -33,7 +33,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
         <SidebarFooter className="p-2">
            <Button variant="ghost" className="w-full justify-start gap-2 group-data-[collapsible=icon]:justify-center">
              <LogOut size={18}/>
-             <span className="group-data-[collapsible=icon]:hidden">Log Out</span>
+             <span className="group-data-[collapsible=icon]:hidden">Sair</span>
            </Button>
         </SidebarFooter>
       </Sidebar>

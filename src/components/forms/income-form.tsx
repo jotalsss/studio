@@ -32,25 +32,25 @@ export function IncomeForm() {
   function onSubmit(values: z.infer<typeof TransactionFormSchema>) {
     addTransaction({ ...values, type: 'income', date: values.date });
     toast({
-      title: "Income Added",
-      description: `${values.description} of R$ ${values.amount.toFixed(2)} recorded.`,
+      title: "Receita Adicionada",
+      description: `${values.description} de R$ ${values.amount.toFixed(2)} registrada.`,
     });
     form.reset();
-    router.push("/"); // Navigate to dashboard after adding income
+    router.push("/"); 
   }
 
   return (
     <Card className="w-full max-w-lg mx-auto shadow-xl">
       <CardHeader>
-        <CardTitle className="text-2xl">Add New Income</CardTitle>
-        <CardDescription>Record a new source of income to track your earnings.</CardDescription>
+        <CardTitle className="text-2xl">Adicionar Nova Receita</CardTitle>
+        <CardDescription>Registre uma nova fonte de receita para acompanhar seus ganhos.</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <TransactionFormFields control={form.control} transactionType="income" />
             <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-              {form.formState.isSubmitting ? "Adding..." : "Add Income"}
+              {form.formState.isSubmitting ? "Adicionando..." : "Adicionar Receita"}
             </Button>
           </form>
         </Form>

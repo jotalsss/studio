@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { FinancialSummary } from "@/lib/types";
-import { TrendingUp, TrendingDown, DollarSign, Scale } from "lucide-react";
+import { TrendingUp, TrendingDown, Scale } from "lucide-react"; // Removed DollarSign as it wasn't used
 
 interface FinancialSummaryCardProps {
   summary: FinancialSummary;
@@ -27,9 +27,9 @@ const StatCard = ({ title, value, icon, colorClass }: { title: string; value: nu
 export function FinancialSummaryDisplay({ summary }: FinancialSummaryCardProps) {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <StatCard title="Total Income" value={summary.totalIncome} icon={TrendingUp} colorClass="text-green-500"/>
-      <StatCard title="Total Expenses" value={summary.totalExpenses} icon={TrendingDown} colorClass="text-red-500"/>
-      <StatCard title="Balance" value={summary.balance} icon={Scale} colorClass="text-primary"/>
+      <StatCard title="Receita Total" value={summary.totalIncome} icon={TrendingUp} colorClass="text-green-500"/>
+      <StatCard title="Despesa Total" value={summary.totalExpenses} icon={TrendingDown} colorClass="text-red-500"/>
+      <StatCard title="Saldo" value={summary.balance} icon={Scale} colorClass="text-primary"/>
     </div>
   );
 }

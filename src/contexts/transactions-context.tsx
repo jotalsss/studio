@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 import React, { createContext, useContext, useState, useMemo, useCallback } from 'react';
-import type { Transaction, TransactionType } from '@/lib/types';
+import type { Transaction } from '@/lib/types'; // Removed TransactionType as it's part of Transaction
 
 interface TransactionsContextType {
   transactions: Transaction[];
@@ -14,21 +14,20 @@ const TransactionsContext = createContext<TransactionsContextType | undefined>(u
 
 export function TransactionsProvider({ children }: { children: ReactNode }) {
   const [transactions, setTransactions] = useState<Transaction[]>(() => {
-    // Initialize with some mock data or from localStorage if desired
     const initialTransactions: Transaction[] = [
-      { id: '1', type: 'income', description: 'Salary', amount: 5000, date: new Date(2024, 6, 1).toISOString(), category: 'Salary' },
-      { id: '2', type: 'expense', description: 'Rent', amount: 1500, date: new Date(2024, 6, 5).toISOString(), category: 'Housing' },
-      { id: '3', type: 'expense', description: 'Groceries', amount: 300, date: new Date(2024, 6, 7).toISOString(), category: 'Food' },
-      { id: '4', type: 'income', description: 'Freelance Project', amount: 750, date: new Date(2024, 6, 10).toISOString(), category: 'Freelance' },
-      { id: '5', type: 'expense', description: 'Internet Bill', amount: 60, date: new Date(2024, 6, 12).toISOString(), category: 'Utilities' },
+      { id: '1', type: 'income', description: 'Salário', amount: 5000, date: new Date(2024, 6, 1).toISOString(), category: 'Salário' },
+      { id: '2', type: 'expense', description: 'Aluguel', amount: 1500, date: new Date(2024, 6, 5).toISOString(), category: 'Moradia' },
+      { id: '3', type: 'expense', description: 'Supermercado', amount: 300, date: new Date(2024, 6, 7).toISOString(), category: 'Alimentação' },
+      { id: '4', type: 'income', description: 'Projeto Freelance', amount: 750, date: new Date(2024, 6, 10).toISOString(), category: 'Freelance' },
+      { id: '5', type: 'expense', description: 'Conta de Internet', amount: 60, date: new Date(2024, 6, 12).toISOString(), category: 'Contas Fixas' },
     ];
-    return initialTransactions;
+    return initialTransactions.sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // ensure initial sort
   });
 
   const addTransaction = useCallback((transactionInput: Omit<Transaction, 'id' | 'date'> & { date: Date }) => {
     const newTransaction: Transaction = {
       ...transactionInput,
-      id: Date.now().toString(), // Simple ID generation
+      id: Date.now().toString(), 
       date: transactionInput.date.toISOString(),
     };
     setTransactions((prevTransactions) => [...prevTransactions, newTransaction].sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
@@ -49,7 +48,7 @@ export function TransactionsProvider({ children }: { children: ReactNode }) {
 export function useTransactions() {
   const context = useContext(TransactionsContext);
   if (context === undefined) {
-    throw new Error('useTransactions must be used within a TransactionsProvider');
+    throw new Error('useTransactions deve ser usado dentro de um TransactionsProvider');
   }
   return context;
 }
